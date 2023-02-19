@@ -998,12 +998,12 @@
         "id": "d065d81647b96967",
         "type": "http response",
         "z": "7bea746999d0be15",
-        "name": "Response",
+        "name": "Return Response",
         "statusCode": "200",
         "headers": {
             "Content-Type": "text/plain"
         },
-        "x": 700,
+        "x": 730,
         "y": 120,
         "wires": []
     },
@@ -1031,7 +1031,7 @@
         "id": "a4d4660dcb1b35a1",
         "type": "debug",
         "z": "7bea746999d0be15",
-        "name": "Debug Payload",
+        "name": "Debug GetFileResponse",
         "active": true,
         "tosidebar": true,
         "console": false,
@@ -1040,7 +1040,7 @@
         "targetType": "msg",
         "statusVal": "",
         "statusType": "auto",
-        "x": 640,
+        "x": 670,
         "y": 220,
         "wires": []
     }
