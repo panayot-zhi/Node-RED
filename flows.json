@@ -396,11 +396,11 @@
         "arraySpltType": "len",
         "stream": false,
         "addname": "node_data",
-        "x": 1050,
-        "y": 440,
+        "x": 990,
+        "y": 420,
         "wires": [
             [
-                "2462f18c8476d6a9"
+                "f53061b7e6346079"
             ]
         ]
     },
@@ -500,6 +500,33 @@
         "libs": [],
         "x": 1500,
         "y": 640,
+        "wires": [
+            [
+                "2462f18c8476d6a9"
+            ]
+        ]
+    },
+    {
+        "id": "f53061b7e6346079",
+        "type": "change",
+        "z": "cae5227b907b5602",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "node_data",
+                "pt": "msg",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1070,
+        "y": 480,
         "wires": [
             [
                 "2462f18c8476d6a9"
