@@ -24,6 +24,14 @@
         "env": []
     },
     {
+        "id": "7bea746999d0be15",
+        "type": "tab",
+        "label": "Mock METER.AC File",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
         "id": "c436fa76dcc9e99a",
         "type": "postgreSQLConfig",
         "name": "MeterAC Meta Database",
@@ -158,7 +166,7 @@
         "wires": [
             [
                 "c5bec40d0dce6707",
-                "bd37c211a7e3c99d"
+                "3219794e0e5813fa"
             ]
         ]
     },
@@ -175,8 +183,8 @@
         "targetType": "msg",
         "statusVal": "",
         "statusType": "auto",
-        "x": 520,
-        "y": 400,
+        "x": 340,
+        "y": 340,
         "wires": []
     },
     {
@@ -207,8 +215,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 640,
-        "y": 300,
+        "x": 1100,
+        "y": 420,
         "wires": [
             [
                 "e3ee4258de8c1c5d"
@@ -305,17 +313,21 @@
         "name": "",
         "method": "GET",
         "ret": "txt",
-        "paytoqs": false,
+        "paytoqs": "ignore",
         "url": "",
+        "tls": "",
         "persist": false,
+        "proxy": "",
         "insecureHTTPParser": false,
         "authType": "",
         "senderr": false,
         "headers": [],
-        "x": 1130,
+        "x": 810,
         "y": 420,
         "wires": [
-            []
+            [
+                "72cc97f4100bedb1"
+            ]
         ]
     },
     {
@@ -337,9 +349,48 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 930,
-        "y": 400,
+        "x": 630,
+        "y": 340,
         "wires": [
+            [
+                "c8b8f26e7aa43e5d"
+            ]
+        ]
+    },
+    {
+        "id": "72cc97f4100bedb1",
+        "type": "split",
+        "z": "cae5227b907b5602",
+        "name": "",
+        "splt": "\\n",
+        "spltType": "str",
+        "arraySplt": 1,
+        "arraySpltType": "len",
+        "stream": false,
+        "addname": "",
+        "x": 910,
+        "y": 540,
+        "wires": [
+            [
+                "3e953f8d3e486786"
+            ]
+        ]
+    },
+    {
+        "id": "3e953f8d3e486786",
+        "type": "array-loop",
+        "z": "cae5227b907b5602",
+        "name": "",
+        "key": "al3e953f8d3e486786",
+        "keyType": "msg",
+        "reset": false,
+        "resetValue": "value-null",
+        "array": "",
+        "arrayType": "msg",
+        "x": 1120,
+        "y": 560,
+        "wires": [
+            [],
             []
         ]
     },
@@ -805,5 +856,70 @@
                 "02ac53c01fe46f19"
             ]
         ]
+    },
+    {
+        "id": "3aa06e365d7e7f69",
+        "type": "http in",
+        "z": "7bea746999d0be15",
+        "name": "GetFileExample",
+        "url": "/getfile",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 260,
+        "y": 120,
+        "wires": [
+            [
+                "0f3b8ec52d7ad2ca"
+            ]
+        ]
+    },
+    {
+        "id": "d065d81647b96967",
+        "type": "http response",
+        "z": "7bea746999d0be15",
+        "name": "Response",
+        "statusCode": "200",
+        "headers": {},
+        "x": 700,
+        "y": 120,
+        "wires": []
+    },
+    {
+        "id": "0f3b8ec52d7ad2ca",
+        "type": "function",
+        "z": "7bea746999d0be15",
+        "name": "Build Response",
+        "func": "msg.payload = \"G02 R121 N01 V 45 Z +000 N 00 0014 0018 1012 +21.8 035 016 3.3 1538729821 05.10.2018\\nG02 R128 N01 V 45 Z +000 N 00 0016 0022 1012 +21.0 034 129 3.3 1538730121 05.10.2018\"\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 480,
+        "y": 120,
+        "wires": [
+            [
+                "d065d81647b96967",
+                "a4d4660dcb1b35a1"
+            ]
+        ]
+    },
+    {
+        "id": "a4d4660dcb1b35a1",
+        "type": "debug",
+        "z": "7bea746999d0be15",
+        "name": "Debug Payload",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 640,
+        "y": 220,
+        "wires": []
     }
 ]
