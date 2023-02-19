@@ -24,6 +24,31 @@
         "env": []
     },
     {
+        "id": "c436fa76dcc9e99a",
+        "type": "postgreSQLConfig",
+        "name": "MeterAC Meta Database",
+        "host": "127.0.0.1",
+        "hostFieldType": "str",
+        "port": "5432",
+        "portFieldType": "num",
+        "database": "meterac",
+        "databaseFieldType": "str",
+        "ssl": "false",
+        "sslFieldType": "bool",
+        "applicationName": "",
+        "applicationNameType": "str",
+        "max": "10",
+        "maxFieldType": "num",
+        "idle": "1000",
+        "idleFieldType": "num",
+        "connectionTimeout": "10000",
+        "connectionTimeoutFieldType": "num",
+        "user": "",
+        "userFieldType": "str",
+        "password": "",
+        "passwordFieldType": "str"
+    },
+    {
         "id": "ed407ee7cce358c9",
         "type": "inject",
         "z": "cae5227b907b5602",
@@ -48,7 +73,7 @@
         "y": 60,
         "wires": [
             [
-                "7cef52d41aa45cea"
+                "381882723424c835"
             ]
         ]
     },
@@ -65,8 +90,8 @@
         "targetType": "full",
         "statusVal": "",
         "statusType": "auto",
-        "x": 940,
-        "y": 240,
+        "x": 1280,
+        "y": 260,
         "wires": []
     },
     {
@@ -103,7 +128,7 @@
         "y": 340,
         "wires": [
             [
-                "cc3fbbc11988dcac"
+                "3ae7d4db21a28c3e"
             ],
             [
                 "ead8bb6b3d7e4734",
@@ -203,9 +228,73 @@
         "targetType": "full",
         "statusVal": "",
         "statusType": "auto",
-        "x": 660,
-        "y": 120,
+        "x": 820,
+        "y": 60,
         "wires": []
+    },
+    {
+        "id": "381882723424c835",
+        "type": "postgresql",
+        "z": "cae5227b907b5602",
+        "name": "Obtain a List of Nodes",
+        "query": "SELECT VERSION();",
+        "postgreSQLConfig": "c436fa76dcc9e99a",
+        "split": false,
+        "rowsPerMsg": 1,
+        "outputs": 1,
+        "x": 360,
+        "y": 60,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "3ae7d4db21a28c3e",
+        "type": "function",
+        "z": "cae5227b907b5602",
+        "name": "Return Message",
+        "func": "\nreturn \"Complete\";",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 920,
+        "y": 300,
+        "wires": [
+            [
+                "cc3fbbc11988dcac"
+            ]
+        ]
+    },
+    {
+        "id": "3a850190122b6199",
+        "type": "inject",
+        "z": "cae5227b907b5602",
+        "name": "Trigger",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 110,
+        "y": 240,
+        "wires": [
+            [
+                "7cef52d41aa45cea"
+            ]
+        ]
     },
     {
         "id": "fd2d7768.345b98",
