@@ -395,12 +395,13 @@
         "arraySplt": 1,
         "arraySpltType": "len",
         "stream": false,
-        "addname": "node_data",
+        "addname": "",
         "x": 990,
         "y": 420,
         "wires": [
             [
-                "f53061b7e6346079"
+                "f53061b7e6346079",
+                "09d8b44b98b91f74"
             ]
         ]
     },
@@ -532,6 +533,22 @@
                 "2462f18c8476d6a9"
             ]
         ]
+    },
+    {
+        "id": "09d8b44b98b91f74",
+        "type": "debug",
+        "z": "cae5227b907b5602",
+        "name": "debug 1",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1180,
+        "y": 400,
+        "wires": []
     },
     {
         "id": "fd2d7768.345b98",
