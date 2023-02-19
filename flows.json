@@ -341,7 +341,7 @@
                 "t": "set",
                 "p": "url",
                 "pt": "msg",
-                "to": "http://localhost:1880/getfile",
+                "to": "http://127.0.0.1:1880/getfile",
                 "tot": "str"
             }
         ],
