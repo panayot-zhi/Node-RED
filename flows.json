@@ -99,7 +99,7 @@
         "type": "function",
         "z": "cae5227b907b5602",
         "name": "Create Nodes Array",
-        "func": "var nodes_array = [\"N01\", \"N03\", \"N06\"]\nmsg.array = nodes_array;\nreturn msg;",
+        "func": "var nodes_array = [{name: \"N01\"}, {name: \"N03\"}, {name: \"N06\"}]\nmsg.array = nodes_array;\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
@@ -207,8 +207,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 600,
-        "y": 280,
+        "x": 640,
+        "y": 300,
         "wires": [
             [
                 "e3ee4258de8c1c5d"
@@ -297,6 +297,51 @@
         "x": 600,
         "y": 640,
         "wires": []
+    },
+    {
+        "id": "c8b8f26e7aa43e5d",
+        "type": "http request",
+        "z": "cae5227b907b5602",
+        "name": "",
+        "method": "GET",
+        "ret": "txt",
+        "paytoqs": false,
+        "url": "",
+        "persist": false,
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 1130,
+        "y": 420,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "3219794e0e5813fa",
+        "type": "change",
+        "z": "cae5227b907b5602",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "url",
+                "pt": "msg",
+                "to": "$join([\"https://meter.ac/gs/nodes/\", msg.payload.name, \"/data.raw\"])",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 930,
+        "y": 400,
+        "wires": [
+            []
+        ]
     },
     {
         "id": "fd2d7768.345b98",
