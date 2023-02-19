@@ -842,7 +842,7 @@
         "name": "Response",
         "statusCode": "200",
         "headers": {
-            "Content-Type": "application/json"
+            "Content-Type": "text/plain"
         },
         "x": 700,
         "y": 120,
