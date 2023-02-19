@@ -253,7 +253,7 @@
         "type": "function",
         "z": "cae5227b907b5602",
         "name": "Return Message",
-        "func": "\nreturn \"Complete\";",
+        "func": "msg.payload = \"Complete.\"\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
