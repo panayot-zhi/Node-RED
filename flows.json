@@ -69,8 +69,8 @@
         "topic": "",
         "payload": "",
         "payloadType": "date",
-        "x": 230,
-        "y": 820,
+        "x": 110,
+        "y": 640,
         "wires": [
             [
                 "381882723424c835"
@@ -220,15 +220,17 @@
         "type": "postgresql",
         "z": "cae5227b907b5602",
         "name": "Obtain a List of Nodes",
-        "query": "SELECT VERSION();",
+        "query": "SELECT name FROM public.device;",
         "postgreSQLConfig": "c436fa76dcc9e99a",
         "split": false,
         "rowsPerMsg": 1,
         "outputs": 1,
-        "x": 440,
-        "y": 820,
+        "x": 320,
+        "y": 640,
         "wires": [
-            []
+            [
+                "df8bb4532849ed1d"
+            ]
         ]
     },
     {
@@ -278,6 +280,23 @@
                 "7cef52d41aa45cea"
             ]
         ]
+    },
+    {
+        "id": "df8bb4532849ed1d",
+        "type": "debug",
+        "z": "cae5227b907b5602",
+        "name": "Debug List of Nodes",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 600,
+        "y": 640,
+        "wires": []
     },
     {
         "id": "fd2d7768.345b98",
