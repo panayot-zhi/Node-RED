@@ -220,7 +220,8 @@
         "y": 440,
         "wires": [
             [
-                "e3ee4258de8c1c5d"
+                "e3ee4258de8c1c5d",
+                "d493253f7c25430a"
             ]
         ]
     },
@@ -457,7 +458,7 @@
         "type": "debug",
         "z": "cae5227b907b5602",
         "name": "Debug Processing Node Data Start",
-        "active": true,
+        "active": false,
         "tosidebar": true,
         "console": false,
         "tostatus": false,
@@ -484,7 +485,8 @@
         "y": 640,
         "wires": [
             [
-                "2462f18c8476d6a9"
+                "2462f18c8476d6a9",
+                "23815575a986b84c"
             ]
         ]
     },
@@ -548,6 +550,40 @@
         "statusType": "auto",
         "x": 550,
         "y": 40,
+        "wires": []
+    },
+    {
+        "id": "23815575a986b84c",
+        "type": "debug",
+        "z": "cae5227b907b5602",
+        "name": "Debug Return Message",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1730,
+        "y": 680,
+        "wires": []
+    },
+    {
+        "id": "d493253f7c25430a",
+        "type": "debug",
+        "z": "cae5227b907b5602",
+        "name": "Debug Return Message",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1510,
+        "y": 320,
         "wires": []
     },
     {
