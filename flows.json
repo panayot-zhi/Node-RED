@@ -588,7 +588,7 @@
         "method": "POST",
         "ret": "txt",
         "paytoqs": "ignore",
-        "url": "http://localhost:1880/frost",
+        "url": "http://127.0.0.1:1880/frost",
         "tls": "",
         "persist": false,
         "proxy": "",
