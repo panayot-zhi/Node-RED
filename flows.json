@@ -99,7 +99,7 @@
         "type": "function",
         "z": "cae5227b907b5602",
         "name": "Create Nodes Array",
-        "func": "var nodes_array = [\"N01\", \"N02\", \"N03\", \"N04\", \"N05\"]\nmsg.array = nodes_array;\nreturn msg;",
+        "func": "var nodes_array = [\"N01\", \"N03\", \"N06\"]\nmsg.array = nodes_array;\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
