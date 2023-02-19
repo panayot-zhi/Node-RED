@@ -11,7 +11,7 @@
         "id": "7e687ef2b7a2af2c",
         "type": "tab",
         "label": "Loops Example",
-        "disabled": true,
+        "disabled": false,
         "info": "",
         "env": []
     },
@@ -127,7 +127,7 @@
         "type": "array-loop",
         "z": "cae5227b907b5602",
         "name": "Process Nodes",
-        "key": "ale3ee4258de8c1c5d",
+        "key": "nodes_array_index",
         "keyType": "msg",
         "reset": false,
         "resetValue": "value-null",
