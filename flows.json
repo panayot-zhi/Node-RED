@@ -873,7 +873,7 @@
         "type": "debug",
         "z": "7bea746999d0be15",
         "name": "Debug Payload",
-        "active": false,
+        "active": true,
         "tosidebar": true,
         "console": false,
         "tostatus": false,
