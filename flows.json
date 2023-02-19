@@ -43,9 +43,9 @@
         "idleFieldType": "num",
         "connectionTimeout": "10000",
         "connectionTimeoutFieldType": "num",
-        "user": "",
+        "user": "sensorthings",
         "userFieldType": "str",
-        "password": "",
+        "password": "03N8gaupWWkVwD7G19MC",
         "passwordFieldType": "str"
     },
     {
