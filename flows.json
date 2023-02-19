@@ -394,7 +394,7 @@
         "name": "Process Node Data",
         "key": "al2462f18c8476d6a9",
         "keyType": "msg",
-        "reset": false,
+        "reset": true,
         "resetValue": "value-null",
         "array": "node_data",
         "arrayType": "msg",
