@@ -117,8 +117,7 @@
         "y": 240,
         "wires": [
             [
-                "e3ee4258de8c1c5d",
-                "d23a411b5ea55606"
+                "e3ee4258de8c1c5d"
             ]
         ]
     },
@@ -240,7 +239,7 @@
         "wires": [
             [
                 "df8bb4532849ed1d",
-                "e3ee4258de8c1c5d"
+                "ccf05f33ec256541"
             ]
         ]
     },
@@ -305,7 +304,7 @@
         "targetType": "msg",
         "statusVal": "",
         "statusType": "auto",
-        "x": 620,
+        "x": 880,
         "y": 100,
         "wires": []
     },
@@ -393,7 +392,7 @@
         "type": "array-loop",
         "z": "cae5227b907b5602",
         "name": "Process Node Data",
-        "key": "al2462f18c8476d6a9",
+        "key": "node_data_index",
         "keyType": "msg",
         "reset": true,
         "resetValue": "value-null",
@@ -537,23 +536,6 @@
         "wires": []
     },
     {
-        "id": "d23a411b5ea55606",
-        "type": "debug",
-        "z": "cae5227b907b5602",
-        "name": "Nodes Array",
-        "active": false,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "nodes_array",
-        "targetType": "msg",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 530,
-        "y": 240,
-        "wires": []
-    },
-    {
         "id": "23815575a986b84c",
         "type": "debug",
         "z": "cae5227b907b5602",
@@ -586,6 +568,33 @@
         "x": 1490,
         "y": 500,
         "wires": []
+    },
+    {
+        "id": "ccf05f33ec256541",
+        "type": "change",
+        "z": "cae5227b907b5602",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "nodes_array",
+                "pt": "msg",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 540,
+        "y": 160,
+        "wires": [
+            [
+                "e3ee4258de8c1c5d"
+            ]
+        ]
     },
     {
         "id": "fd2d7768.345b98",
