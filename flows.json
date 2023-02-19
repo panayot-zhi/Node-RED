@@ -373,7 +373,7 @@
         "type": "debug",
         "z": "cae5227b907b5602",
         "name": "Debug Payload",
-        "active": true,
+        "active": false,
         "tosidebar": true,
         "console": false,
         "tostatus": false,
