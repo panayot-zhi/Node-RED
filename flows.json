@@ -497,7 +497,7 @@
                 "t": "set",
                 "p": "node_data",
                 "pt": "msg",
-                "to": "$split(msg.payload, '\\n ')",
+                "to": "$split(msg.payload, '\\n')",
                 "tot": "jsonata"
             }
         ],
