@@ -107,7 +107,7 @@
         "type": "function",
         "z": "cae5227b907b5602",
         "name": "Create Nodes Array",
-        "func": "var nodes_array = [{name: \"N01\"}, {name: \"N03\"}, {name: \"N06\"}]\nmsg.array = nodes_array;\nreturn msg;",
+        "func": "var nodes_array = [{name: \"N01\"}, {name: \"N03\"}, {name: \"N06\"}]\nmsg.nodes_array = nodes_array;\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
@@ -125,14 +125,14 @@
         "id": "e3ee4258de8c1c5d",
         "type": "array-loop",
         "z": "cae5227b907b5602",
-        "name": "Loop through array sequentially",
+        "name": "Process Nodes",
         "key": "ale3ee4258de8c1c5d",
         "keyType": "msg",
         "reset": false,
         "resetValue": "value-null",
-        "array": "array",
+        "array": "nodes_array",
         "arrayType": "msg",
-        "x": 550,
+        "x": 500,
         "y": 160,
         "wires": [
             [
@@ -200,8 +200,8 @@
         "targetType": "msg",
         "statusVal": "",
         "statusType": "auto",
-        "x": 950,
-        "y": 260,
+        "x": 890,
+        "y": 180,
         "wires": []
     },
     {
@@ -215,8 +215,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 1060,
-        "y": 420,
+        "x": 1500,
+        "y": 440,
         "wires": [
             [
                 "e3ee4258de8c1c5d"
@@ -327,7 +327,7 @@
         "wires": [
             [
                 "5b5198bb1441ab39",
-                "bd37c211a7e3c99d"
+                "b815d0f7e8626e84"
             ]
         ]
     },
@@ -384,6 +384,127 @@
         "x": 860,
         "y": 540,
         "wires": []
+    },
+    {
+        "id": "b815d0f7e8626e84",
+        "type": "split",
+        "z": "cae5227b907b5602",
+        "name": "",
+        "splt": "\\n",
+        "spltType": "str",
+        "arraySplt": 1,
+        "arraySpltType": "len",
+        "stream": false,
+        "addname": "node_data",
+        "x": 1050,
+        "y": 440,
+        "wires": [
+            [
+                "2462f18c8476d6a9"
+            ]
+        ]
+    },
+    {
+        "id": "2462f18c8476d6a9",
+        "type": "array-loop",
+        "z": "cae5227b907b5602",
+        "name": "Process Node Data",
+        "key": "al2462f18c8476d6a9",
+        "keyType": "msg",
+        "reset": false,
+        "resetValue": "value-null",
+        "array": "node_data",
+        "arrayType": "msg",
+        "x": 1270,
+        "y": 520,
+        "wires": [
+            [
+                "bd37c211a7e3c99d"
+            ],
+            [
+                "7fc79e8511ea4e8f",
+                "4d6dae8ac275cffe"
+            ]
+        ]
+    },
+    {
+        "id": "7fc79e8511ea4e8f",
+        "type": "delay",
+        "z": "cae5227b907b5602",
+        "name": "",
+        "pauseType": "delay",
+        "timeout": "1",
+        "timeoutUnits": "seconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "allowrate": false,
+        "outputs": 1,
+        "x": 1260,
+        "y": 620,
+        "wires": [
+            [
+                "d20e1ce9259b672b",
+                "40395c49fc5b987b"
+            ]
+        ]
+    },
+    {
+        "id": "d20e1ce9259b672b",
+        "type": "debug",
+        "z": "cae5227b907b5602",
+        "name": "Debug Processing Node Data End",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1380,
+        "y": 720,
+        "wires": []
+    },
+    {
+        "id": "4d6dae8ac275cffe",
+        "type": "debug",
+        "z": "cae5227b907b5602",
+        "name": "Debug Processing Node Data Start",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1580,
+        "y": 540,
+        "wires": []
+    },
+    {
+        "id": "40395c49fc5b987b",
+        "type": "function",
+        "z": "cae5227b907b5602",
+        "name": "Return Message",
+        "func": "\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1500,
+        "y": 640,
+        "wires": [
+            [
+                "2462f18c8476d6a9"
+            ]
+        ]
     },
     {
         "id": "fd2d7768.345b98",
