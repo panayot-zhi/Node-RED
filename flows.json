@@ -16,6 +16,14 @@
         "env": []
     },
     {
+        "id": "6890a2de1814b84e",
+        "type": "tab",
+        "label": "Mock FROST Server",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
         "id": "ed407ee7cce358c9",
         "type": "inject",
         "z": "cae5227b907b5602",
@@ -554,5 +562,95 @@
         "x": 550,
         "y": 500,
         "wires": []
+    },
+    {
+        "id": "1a4ccb184f217c71",
+        "type": "http in",
+        "z": "6890a2de1814b84e",
+        "name": "",
+        "url": "/frost",
+        "method": "post",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 300,
+        "y": 100,
+        "wires": [
+            [
+                "a007e37e4c6ad277",
+                "a79694847aef5a5b"
+            ]
+        ]
+    },
+    {
+        "id": "a007e37e4c6ad277",
+        "type": "debug",
+        "z": "6890a2de1814b84e",
+        "name": "Debug Payload",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 400,
+        "y": 160,
+        "wires": []
+    },
+    {
+        "id": "ea7cf0a0a0c4e00f",
+        "type": "http response",
+        "z": "6890a2de1814b84e",
+        "name": "OK",
+        "statusCode": "200",
+        "headers": {},
+        "x": 930,
+        "y": 100,
+        "wires": []
+    },
+    {
+        "id": "02ac53c01fe46f19",
+        "type": "function",
+        "z": "6890a2de1814b84e",
+        "name": "Build OK Response",
+        "func": "msg.payload = {\n    status: \"OK\"\n};\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 750,
+        "y": 100,
+        "wires": [
+            [
+                "ea7cf0a0a0c4e00f"
+            ]
+        ]
+    },
+    {
+        "id": "a79694847aef5a5b",
+        "type": "delay",
+        "z": "6890a2de1814b84e",
+        "name": "",
+        "pauseType": "delay",
+        "timeout": "5",
+        "timeoutUnits": "seconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "allowrate": false,
+        "outputs": 1,
+        "x": 520,
+        "y": 100,
+        "wires": [
+            [
+                "02ac53c01fe46f19"
+            ]
+        ]
     }
 ]
