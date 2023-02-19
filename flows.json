@@ -325,9 +325,7 @@
         "x": 810,
         "y": 420,
         "wires": [
-            [
-                "72cc97f4100bedb1"
-            ]
+            []
         ]
     },
     {
@@ -355,43 +353,6 @@
             [
                 "c8b8f26e7aa43e5d"
             ]
-        ]
-    },
-    {
-        "id": "72cc97f4100bedb1",
-        "type": "split",
-        "z": "cae5227b907b5602",
-        "name": "",
-        "splt": "\\n",
-        "spltType": "str",
-        "arraySplt": 1,
-        "arraySpltType": "len",
-        "stream": false,
-        "addname": "",
-        "x": 910,
-        "y": 540,
-        "wires": [
-            [
-                "3e953f8d3e486786"
-            ]
-        ]
-    },
-    {
-        "id": "3e953f8d3e486786",
-        "type": "array-loop",
-        "z": "cae5227b907b5602",
-        "name": "",
-        "key": "al3e953f8d3e486786",
-        "keyType": "msg",
-        "reset": false,
-        "resetValue": "value-null",
-        "array": "",
-        "arrayType": "msg",
-        "x": 1120,
-        "y": 560,
-        "wires": [
-            [],
-            []
         ]
     },
     {
@@ -880,7 +841,9 @@
         "z": "7bea746999d0be15",
         "name": "Response",
         "statusCode": "200",
-        "headers": {},
+        "headers": {
+            "Content-Type": "text/plain"
+        },
         "x": 700,
         "y": 120,
         "wires": []
