@@ -69,8 +69,8 @@
         "topic": "",
         "payload": "",
         "payloadType": "date",
-        "x": 150,
-        "y": 60,
+        "x": 230,
+        "y": 820,
         "wires": [
             [
                 "381882723424c835"
@@ -90,8 +90,8 @@
         "targetType": "msg",
         "statusVal": "",
         "statusType": "auto",
-        "x": 1280,
-        "y": 260,
+        "x": 1300,
+        "y": 80,
         "wires": []
     },
     {
@@ -105,8 +105,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 290,
-        "y": 240,
+        "x": 310,
+        "y": 60,
         "wires": [
             [
                 "e3ee4258de8c1c5d"
@@ -124,8 +124,8 @@
         "resetValue": "value-null",
         "array": "array",
         "arrayType": "msg",
-        "x": 530,
-        "y": 340,
+        "x": 550,
+        "y": 160,
         "wires": [
             [
                 "3ae7d4db21a28c3e"
@@ -153,8 +153,8 @@
         "drop": false,
         "allowrate": false,
         "outputs": 1,
-        "x": 360,
-        "y": 460,
+        "x": 380,
+        "y": 280,
         "wires": [
             [
                 "c5bec40d0dce6707",
@@ -175,8 +175,8 @@
         "targetType": "msg",
         "statusVal": "",
         "statusType": "auto",
-        "x": 500,
-        "y": 580,
+        "x": 520,
+        "y": 400,
         "wires": []
     },
     {
@@ -192,8 +192,8 @@
         "targetType": "msg",
         "statusVal": "",
         "statusType": "auto",
-        "x": 930,
-        "y": 440,
+        "x": 950,
+        "y": 260,
         "wires": []
     },
     {
@@ -207,30 +207,13 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 580,
-        "y": 460,
+        "x": 600,
+        "y": 280,
         "wires": [
             [
                 "e3ee4258de8c1c5d"
             ]
         ]
-    },
-    {
-        "id": "1dfd52cad0eb9266",
-        "type": "debug",
-        "z": "cae5227b907b5602",
-        "name": "Debug Processing All Nodes End",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "true",
-        "targetType": "full",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 820,
-        "y": 60,
-        "wires": []
     },
     {
         "id": "381882723424c835",
@@ -242,8 +225,8 @@
         "split": false,
         "rowsPerMsg": 1,
         "outputs": 1,
-        "x": 360,
-        "y": 60,
+        "x": 440,
+        "y": 820,
         "wires": [
             []
         ]
@@ -252,15 +235,15 @@
         "id": "3ae7d4db21a28c3e",
         "type": "function",
         "z": "cae5227b907b5602",
-        "name": "Return Message",
+        "name": "Return Complete",
         "func": "msg.payload = \"Complete.\"\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 920,
-        "y": 300,
+        "x": 950,
+        "y": 120,
         "wires": [
             [
                 "cc3fbbc11988dcac"
@@ -288,8 +271,8 @@
         "topic": "",
         "payload": "",
         "payloadType": "date",
-        "x": 110,
-        "y": 240,
+        "x": 130,
+        "y": 60,
         "wires": [
             [
                 "7cef52d41aa45cea"
