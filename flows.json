@@ -838,6 +838,10 @@
         "z": "7e687ef2b7a2af2c",
         "name": "while-loop",
         "condi": "msg.payload % 3 !== 0",
+        "limit": false,
+        "limitTime": "",
+        "time": "wl1c8465fc10e082",
+        "timeType": "msg",
         "x": 510,
         "y": 545,
         "wires": [
