@@ -2,7 +2,15 @@
     {
         "id": "cae5227b907b5602",
         "type": "tab",
-        "label": "Test",
+        "label": "Import",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "44a72e5cf8149838",
+        "type": "tab",
+        "label": "Main Flow",
         "disabled": false,
         "info": "",
         "env": []
@@ -34,10 +42,10 @@
     {
         "id": "c436fa76dcc9e99a",
         "type": "postgreSQLConfig",
-        "name": "MeterAC Meta Database",
+        "name": "MeterAC LOCAL Database",
         "host": "localhost",
         "hostFieldType": "str",
-        "port": "15432",
+        "port": "5432",
         "portFieldType": "num",
         "database": "meterac",
         "databaseFieldType": "str",
@@ -51,16 +59,16 @@
         "idleFieldType": "num",
         "connectionTimeout": "10000",
         "connectionTimeoutFieldType": "num",
-        "user": "sensorthings",
+        "user": "meterac",
         "userFieldType": "str",
-        "password": "03N8gaupWWkVwD7G19MC",
+        "password": "meterac",
         "passwordFieldType": "str"
     },
     {
         "id": "ed407ee7cce358c9",
         "type": "inject",
         "z": "cae5227b907b5602",
-        "name": "Database",
+        "name": "Import",
         "props": [
             {
                 "p": "payload"
@@ -77,7 +85,7 @@
         "topic": "",
         "payload": "",
         "payloadType": "date",
-        "x": 160,
+        "x": 150,
         "y": 100,
         "wires": [
             [
@@ -98,22 +106,22 @@
         "targetType": "msg",
         "statusVal": "",
         "statusType": "auto",
-        "x": 1300,
-        "y": 260,
+        "x": 1180,
+        "y": 300,
         "wires": []
     },
     {
         "id": "7cef52d41aa45cea",
         "type": "function",
         "z": "cae5227b907b5602",
-        "name": "Create Nodes Array",
-        "func": "var nodes_array = [{name: \"N01\"}, {name: \"N03\"}, {name: \"N06\"}]\nmsg.nodes_array = nodes_array;\nreturn msg;",
+        "name": "Create nodes_array",
+        "func": "var nodes_array = [{name: \"N01\"}]\nmsg.nodes_array = nodes_array;\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 310,
+        "x": 320,
         "y": 240,
         "wires": [
             [
@@ -132,7 +140,7 @@
         "resetValue": "value-null",
         "array": "nodes_array",
         "arrayType": "msg",
-        "x": 500,
+        "x": 520,
         "y": 340,
         "wires": [
             [
@@ -140,32 +148,7 @@
             ],
             [
                 "ead8bb6b3d7e4734",
-                "3d282e9bc6825183"
-            ]
-        ]
-    },
-    {
-        "id": "3d282e9bc6825183",
-        "type": "delay",
-        "z": "cae5227b907b5602",
-        "name": "",
-        "pauseType": "delay",
-        "timeout": "1",
-        "timeoutUnits": "seconds",
-        "rate": "1",
-        "nbRateUnits": "1",
-        "rateUnits": "second",
-        "randomFirst": "1",
-        "randomLast": "5",
-        "randomUnits": "seconds",
-        "drop": false,
-        "allowrate": false,
-        "outputs": 1,
-        "x": 400,
-        "y": 440,
-        "wires": [
-            [
-                "3219794e0e5813fa"
+                "9797321a664c31a9"
             ]
         ]
     },
@@ -182,7 +165,7 @@
         "targetType": "msg",
         "statusVal": "",
         "statusType": "auto",
-        "x": 770,
+        "x": 750,
         "y": 360,
         "wires": []
     },
@@ -236,7 +219,7 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 950,
+        "x": 890,
         "y": 300,
         "wires": [
             [
@@ -278,7 +261,7 @@
         "type": "debug",
         "z": "cae5227b907b5602",
         "name": "Debug List of Nodes",
-        "active": true,
+        "active": false,
         "tosidebar": true,
         "console": false,
         "tostatus": false,
@@ -294,7 +277,7 @@
         "id": "c8b8f26e7aa43e5d",
         "type": "http request",
         "z": "cae5227b907b5602",
-        "name": "",
+        "name": "Retrieve Node Data",
         "method": "GET",
         "ret": "txt",
         "paytoqs": "ignore",
@@ -306,8 +289,8 @@
         "authType": "",
         "senderr": false,
         "headers": [],
-        "x": 810,
-        "y": 600,
+        "x": 790,
+        "y": 620,
         "wires": [
             [
                 "5b5198bb1441ab39",
@@ -346,9 +329,9 @@
         "id": "8b109c9be6c7f73d",
         "type": "comment",
         "z": "cae5227b907b5602",
-        "name": "TODO: correct address",
+        "name": "TODO: pass node",
         "info": "",
-        "x": 640,
+        "x": 650,
         "y": 480,
         "wires": []
     },
@@ -356,7 +339,7 @@
         "id": "5b5198bb1441ab39",
         "type": "debug",
         "z": "cae5227b907b5602",
-        "name": "GetFile Payload",
+        "name": "Debug Response",
         "active": false,
         "tosidebar": true,
         "console": false,
@@ -365,8 +348,8 @@
         "targetType": "full",
         "statusVal": "",
         "statusType": "auto",
-        "x": 860,
-        "y": 720,
+        "x": 870,
+        "y": 700,
         "wires": []
     },
     {
@@ -387,62 +370,17 @@
                 "bd37c211a7e3c99d"
             ],
             [
-                "7fc79e8511ea4e8f",
                 "4d6dae8ac275cffe",
-                "5c90676542ec3ab6"
+                "efe538ae26ec6d6f"
             ]
         ]
-    },
-    {
-        "id": "7fc79e8511ea4e8f",
-        "type": "delay",
-        "z": "cae5227b907b5602",
-        "d": true,
-        "name": "",
-        "pauseType": "delay",
-        "timeout": "1",
-        "timeoutUnits": "seconds",
-        "rate": "1",
-        "nbRateUnits": "1",
-        "rateUnits": "second",
-        "randomFirst": "1",
-        "randomLast": "5",
-        "randomUnits": "seconds",
-        "drop": false,
-        "allowrate": false,
-        "outputs": 1,
-        "x": 1260,
-        "y": 800,
-        "wires": [
-            [
-                "d20e1ce9259b672b",
-                "40395c49fc5b987b"
-            ]
-        ]
-    },
-    {
-        "id": "d20e1ce9259b672b",
-        "type": "debug",
-        "z": "cae5227b907b5602",
-        "name": "Data End",
-        "active": false,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "payload",
-        "targetType": "msg",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 1300,
-        "y": 900,
-        "wires": []
     },
     {
         "id": "4d6dae8ac275cffe",
         "type": "debug",
         "z": "cae5227b907b5602",
         "name": "Data Start",
-        "active": true,
+        "active": false,
         "tosidebar": true,
         "console": false,
         "tostatus": false,
@@ -532,8 +470,8 @@
         "targetType": "full",
         "statusVal": "",
         "statusType": "auto",
-        "x": 1550,
-        "y": 900,
+        "x": 1690,
+        "y": 880,
         "wires": []
     },
     {
@@ -581,12 +519,1030 @@
         ]
     },
     {
-        "id": "5c90676542ec3ab6",
-        "type": "http request",
+        "id": "bd3c56a90e19ea2b",
+        "type": "http in",
         "z": "cae5227b907b5602",
         "name": "",
+        "url": "/measure",
+        "method": "post",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 160,
+        "y": 1180,
+        "wires": [
+            [
+                "0fce3f33915b1cb2",
+                "855fa885a574ab27",
+                "2ed9d1f0c1d46e34"
+            ]
+        ]
+    },
+    {
+        "id": "0fce3f33915b1cb2",
+        "type": "debug",
+        "z": "cae5227b907b5602",
+        "name": "Debug RAW request",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 400,
+        "y": 1180,
+        "wires": []
+    },
+    {
+        "id": "cb6d9418e65113cb",
+        "type": "http response",
+        "z": "cae5227b907b5602",
+        "name": "Response OK",
+        "statusCode": "200",
+        "headers": {},
+        "x": 620,
+        "y": 1420,
+        "wires": []
+    },
+    {
+        "id": "63cd6c0681cc98bd",
+        "type": "csv",
+        "z": "cae5227b907b5602",
+        "name": "Request Parser",
+        "sep": " ",
+        "hdrin": "",
+        "hdrout": "none",
+        "multi": "one",
+        "ret": "\\n",
+        "temp": "gate, report, node_id, validity, signal-strength, unused-1, unused-2, unused-3, unused-4, pm10, pm25, pressure, temperature, humidity, gamma, unused-5, unixtime, ip, sync",
+        "skip": "0",
+        "strings": true,
+        "include_empty_strings": true,
+        "include_null_values": true,
+        "x": 480,
+        "y": 1240,
+        "wires": [
+            [
+                "4998d56a153ca3f7",
+                "a401f8c31b00a3be"
+            ]
+        ]
+    },
+    {
+        "id": "b6c5636d66eb1633",
+        "type": "json",
+        "z": "cae5227b907b5602",
+        "name": "",
+        "property": "payload",
+        "action": "",
+        "pretty": true,
+        "x": 1850,
+        "y": 2340,
+        "wires": [
+            [
+                "076828396c4fb29d",
+                "e4200b028f0e3275"
+            ]
+        ]
+    },
+    {
+        "id": "076828396c4fb29d",
+        "type": "debug",
+        "z": "cae5227b907b5602",
+        "name": "Debug JSON Payload",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 2000,
+        "y": 2240,
+        "wires": []
+    },
+    {
+        "id": "2ed9d1f0c1d46e34",
+        "type": "function",
+        "z": "cae5227b907b5602",
+        "name": "Build OK response",
+        "func": "msg.payload = {\n    status: \"OK\"\n};\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 310,
+        "y": 1420,
+        "wires": [
+            [
+                "c133c9750119cdb6",
+                "cb6d9418e65113cb"
+            ]
+        ]
+    },
+    {
+        "id": "433993060b5c99d3",
+        "type": "function",
+        "z": "cae5227b907b5602",
+        "name": "Build SensorThings Request",
+        "func": "if (msg.payload[0] != null) {\n    // Retrieve temperature value from the payload\n    var result = msg.result;\n    var dsIoTId = msg.payload[0].dsIoTId;\n    \n    // Create a string to insert the result tot he FROST Server against a specific datastream.\n    var newMessage =  { \n        payload: {  \n            \"result\": result, \n            \"resultTime\": msg.data.timestamp,\n            \"phenomenonTime\": msg.data.timestamp,\n            \"Datastream\": {\n                \"@iot.id\": dsIoTId\n                \n            }\n            \n        } \n    };\n    \n    // Configure the Content-Type as json for the FROST Server\n    newMessage.headers = {\"Content-type\" : \"application/json\"};\n    \n    return newMessage;\n} else {\n    node.error(\"DS not found for node: \" + msg.data.poi_name + \"(\" + msg.data.node_id + \")\", msg);\n}\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1640,
+        "y": 2340,
+        "wires": [
+            [
+                "b6c5636d66eb1633"
+            ]
+        ]
+    },
+    {
+        "id": "e4200b028f0e3275",
+        "type": "http request",
+        "z": "cae5227b907b5602",
+        "name": "Post request to FROST",
         "method": "POST",
-        "ret": "obj",
+        "ret": "txt",
+        "paytoqs": "ignore",
+        "url": "http://web:8080/FROST-Server/v1.0/Observations",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "basic",
+        "senderr": false,
+        "headers": [],
+        "x": 2010,
+        "y": 2460,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "94e594096bb004cd",
+        "type": "switch",
+        "z": "cae5227b907b5602",
+        "name": "Switch on Gate",
+        "property": "data.gate",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "G99",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "G02",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 780,
+        "y": 1700,
+        "wires": [
+            [
+                "dcbb9713ce5c0361"
+            ],
+            [
+                "dcbb9713ce5c0361"
+            ]
+        ]
+    },
+    {
+        "id": "4998d56a153ca3f7",
+        "type": "debug",
+        "z": "cae5227b907b5602",
+        "name": "Debug parsed request",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 640,
+        "y": 1340,
+        "wires": []
+    },
+    {
+        "id": "c133c9750119cdb6",
+        "type": "debug",
+        "z": "cae5227b907b5602",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 590,
+        "y": 1480,
+        "wires": []
+    },
+    {
+        "id": "e4736cfc5641e31b",
+        "type": "split",
+        "z": "cae5227b907b5602",
+        "name": "",
+        "splt": "\\n",
+        "spltType": "str",
+        "arraySplt": 1,
+        "arraySpltType": "len",
+        "stream": false,
+        "addname": "attribute",
+        "x": 1210,
+        "y": 1700,
+        "wires": [
+            [
+                "aba36e1249078b51"
+            ]
+        ]
+    },
+    {
+        "id": "aba36e1249078b51",
+        "type": "switch",
+        "z": "cae5227b907b5602",
+        "name": "Switch on attribute",
+        "property": "attribute",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "temperature",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "pressure",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "humidity",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "pm10",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "pm25",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "gamma",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 6,
+        "x": 1390,
+        "y": 1700,
+        "wires": [
+            [
+                "ec594fa80190f787"
+            ],
+            [
+                "46e11c176441703b"
+            ],
+            [
+                "d7d48481a0bb34d2"
+            ],
+            [
+                "f805929760aeb008"
+            ],
+            [
+                "b072a240bd9080b3"
+            ],
+            [
+                "d28ff31cc86e510e"
+            ]
+        ]
+    },
+    {
+        "id": "46e11c176441703b",
+        "type": "change",
+        "z": "cae5227b907b5602",
+        "name": "Set DS type to Pressure",
+        "rules": [
+            {
+                "t": "set",
+                "p": "ds_type",
+                "pt": "msg",
+                "to": "Pressure",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1650,
+        "y": 1640,
+        "wires": [
+            [
+                "86067c8562f4d66c"
+            ]
+        ]
+    },
+    {
+        "id": "ec594fa80190f787",
+        "type": "change",
+        "z": "cae5227b907b5602",
+        "name": "Set DS type to Temperature",
+        "rules": [
+            {
+                "t": "set",
+                "p": "ds_type",
+                "pt": "msg",
+                "to": "Temperature",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1660,
+        "y": 1600,
+        "wires": [
+            [
+                "86067c8562f4d66c"
+            ]
+        ]
+    },
+    {
+        "id": "18cfe1ef338bc8da",
+        "type": "postgresql",
+        "z": "cae5227b907b5602",
+        "name": "Fetch DS",
+        "query": "SELECT \"ID\" as \"dsIoTId\" FROM public.\"DATASTREAMS\" WHERE \"NAME\" = 'DS-{{{ msg.data.poi_name }}}-{{{ msg.ds_type }}}';",
+        "postgreSQLConfig": "",
+        "split": false,
+        "rowsPerMsg": 1,
+        "outputs": 1,
+        "x": 1780,
+        "y": 2120,
+        "wires": [
+            [
+                "af111c2f8379da65",
+                "5a67ead09ad59548"
+            ]
+        ]
+    },
+    {
+        "id": "d7d48481a0bb34d2",
+        "type": "change",
+        "z": "cae5227b907b5602",
+        "name": "Set DS type to Humidity",
+        "rules": [
+            {
+                "t": "set",
+                "p": "ds_type",
+                "pt": "msg",
+                "to": "Humidity",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1650,
+        "y": 1680,
+        "wires": [
+            [
+                "86067c8562f4d66c"
+            ]
+        ]
+    },
+    {
+        "id": "498d8ff8af845e52",
+        "type": "postgresql",
+        "z": "cae5227b907b5602",
+        "name": "Fetch POI",
+        "query": "SELECT p.\"name\" as \"poi_name\", p.\"altitude\", d.\"active\" \n  FROM public.poi p, public.device d, public.device_poi dp \n WHERE d.\"name\" = '{{{ msg.data.node_id }}}'\n   AND d.device_poi_id = dp.device_poi_id\n   AND dp.poi_id = p.poi_id;",
+        "postgreSQLConfig": "c436fa76dcc9e99a",
+        "split": false,
+        "rowsPerMsg": 1,
+        "outputs": 1,
+        "x": 1260,
+        "y": 1240,
+        "wires": [
+            [
+                "f6817be3926feb36",
+                "b960928c1b9c5914"
+            ]
+        ]
+    },
+    {
+        "id": "9720359cd071030f",
+        "type": "debug",
+        "z": "cae5227b907b5602",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 470,
+        "y": 1840,
+        "wires": []
+    },
+    {
+        "id": "a401f8c31b00a3be",
+        "type": "change",
+        "z": "cae5227b907b5602",
+        "name": "Preserve original payload",
+        "rules": [
+            {
+                "t": "set",
+                "p": "data",
+                "pt": "msg",
+                "to": "payload",
+                "tot": "msg",
+                "dc": true
+            },
+            {
+                "t": "set",
+                "p": "data.temperature",
+                "pt": "msg",
+                "to": "$number($replace(data.temperature, '+', ''))",
+                "tot": "jsonata"
+            },
+            {
+                "t": "set",
+                "p": "data.pressure",
+                "pt": "msg",
+                "to": "$number(data.pressure)",
+                "tot": "jsonata"
+            },
+            {
+                "t": "set",
+                "p": "data.altitude",
+                "pt": "msg",
+                "to": "$number(data.altitude)",
+                "tot": "jsonata"
+            },
+            {
+                "t": "set",
+                "p": "data.humidity",
+                "pt": "msg",
+                "to": "$number(data.humidity)",
+                "tot": "jsonata"
+            },
+            {
+                "t": "set",
+                "p": "data.pm10",
+                "pt": "msg",
+                "to": "$number(data.pm10)",
+                "tot": "jsonata"
+            },
+            {
+                "t": "set",
+                "p": "data.pm25",
+                "pt": "msg",
+                "to": "$number(data.pm25)",
+                "tot": "jsonata"
+            },
+            {
+                "t": "set",
+                "p": "data.gamma",
+                "pt": "msg",
+                "to": "$number(data.gamma)",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 750,
+        "y": 1240,
+        "wires": [
+            [
+                "037bb385f7cbf708",
+                "f62fc4af7aba3e77"
+            ]
+        ]
+    },
+    {
+        "id": "82f2ec024a4b3dc9",
+        "type": "change",
+        "z": "cae5227b907b5602",
+        "name": "Calculate values",
+        "rules": [
+            {
+                "t": "set",
+                "p": "data.pressure_sea",
+                "pt": "msg",
+                "to": "$round(data.pressure * $power((1 - (0.0065 * data.altitude) / (data.temperature + 0.0065 * data.altitude + 273.15)), -5.257), 1)",
+                "tot": "jsonata"
+            },
+            {
+                "t": "set",
+                "p": "data.gamma_cpm",
+                "pt": "msg",
+                "to": "$round(data.gamma/5, 0)",
+                "tot": "jsonata"
+            },
+            {
+                "t": "set",
+                "p": "data.timestamp",
+                "pt": "msg",
+                "to": "$fromMillis(data.unixtime*1000)\t",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 300,
+        "y": 1700,
+        "wires": [
+            [
+                "9720359cd071030f",
+                "965107734dccafcc"
+            ]
+        ]
+    },
+    {
+        "id": "dcbb9713ce5c0361",
+        "type": "change",
+        "z": "cae5227b907b5602",
+        "name": "Restore payload",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "data",
+                "tot": "msg",
+                "dc": true
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1020,
+        "y": 1700,
+        "wires": [
+            [
+                "e4736cfc5641e31b"
+            ]
+        ]
+    },
+    {
+        "id": "f805929760aeb008",
+        "type": "change",
+        "z": "cae5227b907b5602",
+        "name": "Set DS type to PM10",
+        "rules": [
+            {
+                "t": "set",
+                "p": "ds_type",
+                "pt": "msg",
+                "to": "PM10",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1640,
+        "y": 1720,
+        "wires": [
+            [
+                "86067c8562f4d66c"
+            ]
+        ]
+    },
+    {
+        "id": "b072a240bd9080b3",
+        "type": "change",
+        "z": "cae5227b907b5602",
+        "name": "Set DS type to PM2.5",
+        "rules": [
+            {
+                "t": "set",
+                "p": "ds_type",
+                "pt": "msg",
+                "to": "PM2.5",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1640,
+        "y": 1760,
+        "wires": [
+            [
+                "86067c8562f4d66c"
+            ]
+        ]
+    },
+    {
+        "id": "d28ff31cc86e510e",
+        "type": "change",
+        "z": "cae5227b907b5602",
+        "name": "Set DS type to CPM",
+        "rules": [
+            {
+                "t": "set",
+                "p": "ds_type",
+                "pt": "msg",
+                "to": "CPM",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1640,
+        "y": 1800,
+        "wires": [
+            [
+                "86067c8562f4d66c"
+            ]
+        ]
+    },
+    {
+        "id": "037bb385f7cbf708",
+        "type": "debug",
+        "z": "cae5227b907b5602",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 890,
+        "y": 1340,
+        "wires": []
+    },
+    {
+        "id": "f6817be3926feb36",
+        "type": "debug",
+        "z": "cae5227b907b5602",
+        "name": "Fetch POI from DB",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1410,
+        "y": 1180,
+        "wires": []
+    },
+    {
+        "id": "965107734dccafcc",
+        "type": "function",
+        "z": "cae5227b907b5602",
+        "name": "Calc temperature dew point",
+        "func": "let a = 6.1121;\nlet d = 234.5;\nlet b = 17.368;\nlet c = 238.88;\n\nif (msg.data.temperature < 0) {\n    b = 17.966;\n    c = 247.15;\n}\n\nlet gm;\n\nif (msg.data.humidity > 0) {\n    gm = Math.log( msg.data.humidity*0.01*( Math.pow(Math.exp(1),((b-msg.data.temperature/d)*(msg.data.temperature/(c+msg.data.temperature))))));\n}\nelse {\n    gm = Math.log( 0.1*0.01*( Math.pow(Math.exp(1),((b-msg.data.temperature/d)*(msg.data.temperature/(c+msg.data.temperature))))));\n}\n\nmsg.data.temperature_dew = Math.round((c*gm/(b-gm))*10)/10;\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 540,
+        "y": 1700,
+        "wires": [
+            [
+                "94e594096bb004cd",
+                "a42fdf920440fc3f",
+                "ab48bc203631ac43"
+            ]
+        ]
+    },
+    {
+        "id": "a42fdf920440fc3f",
+        "type": "debug",
+        "z": "cae5227b907b5602",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 750,
+        "y": 1840,
+        "wires": []
+    },
+    {
+        "id": "855fa885a574ab27",
+        "type": "change",
+        "z": "cae5227b907b5602",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "$trim(msg.payload)\t",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 300,
+        "y": 1300,
+        "wires": [
+            [
+                "63cd6c0681cc98bd"
+            ]
+        ]
+    },
+    {
+        "id": "86067c8562f4d66c",
+        "type": "change",
+        "z": "cae5227b907b5602",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "result",
+                "pt": "msg",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1920,
+        "y": 1680,
+        "wires": [
+            [
+                "bcf48a14a588753a",
+                "81f28cecb425e7bb"
+            ]
+        ]
+    },
+    {
+        "id": "f62fc4af7aba3e77",
+        "type": "function",
+        "z": "cae5227b907b5602",
+        "name": "Check cache for poi",
+        "func": "if (global.get(\"pois\") == null || global.get(\"pois\").get(msg.data.node_id) == null) {\n    return [msg, null];\n}\n\nmsg.payload = [global.get(\"pois\").get(msg.data.node_id)];\n\nreturn [null, msg];\n",
+        "outputs": 2,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1040,
+        "y": 1240,
+        "wires": [
+            [
+                "498d8ff8af845e52"
+            ],
+            [
+                "8eb284335ccafaaa",
+                "4c5ff7fb05e0eef0"
+            ]
+        ]
+    },
+    {
+        "id": "b960928c1b9c5914",
+        "type": "function",
+        "z": "cae5227b907b5602",
+        "name": "Cache poi",
+        "func": "if (global.get(\"pois\") == null) {\n    global.set(\"pois\", new Map());\n}\n\nglobal.get(\"pois\").set(msg.data.node_id, {\n  \"poi_name\": msg.payload[0].poi_name,\n  \"altitude\": msg.payload[0].altitude,\n  \"active\": msg.payload[0].active\n});\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1460,
+        "y": 1240,
+        "wires": [
+            [
+                "4c5ff7fb05e0eef0",
+                "6ab02fcc93bc30ea"
+            ]
+        ]
+    },
+    {
+        "id": "4c5ff7fb05e0eef0",
+        "type": "function",
+        "z": "cae5227b907b5602",
+        "name": "Set poi to data",
+        "func": "var poi = global.get(\"pois\").get(msg.data.node_id);\n\nmsg.data.poi_name = poi.poi_name;\nmsg.data.altitude = Number(poi.altitude);\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1400,
+        "y": 1340,
+        "wires": [
+            [
+                "574da8eb8e26a7b1"
+            ]
+        ]
+    },
+    {
+        "id": "6ab02fcc93bc30ea",
+        "type": "debug",
+        "z": "cae5227b907b5602",
+        "name": "Cache POI",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1670,
+        "y": 1240,
+        "wires": []
+    },
+    {
+        "id": "8eb284335ccafaaa",
+        "type": "debug",
+        "z": "cae5227b907b5602",
+        "name": "Get POI from cache",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1120,
+        "y": 1340,
+        "wires": []
+    },
+    {
+        "id": "bcf48a14a588753a",
+        "type": "function",
+        "z": "cae5227b907b5602",
+        "d": true,
+        "name": "Check cache for DS",
+        "func": "var dsName = \"DS-\" + msg.data.poi_name + \"-\" + msg.ds_type;\n\nif (global.get(dsName) == null) {\n    \n//    node.warn(\"Cache not found: \" + dsName);\n    \n    return [msg, null];\n}\n\n// node.warn(\"Cache FOUND: \" + dsName + \" = \" + global.get(dsName));\n\nmsg.payload = [{\n    \"dsIoTId\": global.get(dsName)\n}];\n\nreturn [null, msg];\n",
+        "outputs": 2,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1560,
+        "y": 2120,
+        "wires": [
+            [
+                "18cfe1ef338bc8da"
+            ],
+            [
+                "433993060b5c99d3"
+            ]
+        ]
+    },
+    {
+        "id": "af111c2f8379da65",
+        "type": "function",
+        "z": "cae5227b907b5602",
+        "name": "Cache DS",
+        "func": "var dsName = \"DS-\" + msg.data.poi_name + \"-\" + msg.ds_type;\n\nglobal.set(dsName, msg.payload[0].dsIoTId);\n\nnode.warn(\"Cacheing \" + dsName + \" to \" + msg.payload[0].dsIoTId);\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1990,
+        "y": 2120,
+        "wires": [
+            [
+                "433993060b5c99d3"
+            ]
+        ]
+    },
+    {
+        "id": "5a67ead09ad59548",
+        "type": "debug",
+        "z": "cae5227b907b5602",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1900,
+        "y": 2060,
+        "wires": []
+    },
+    {
+        "id": "574da8eb8e26a7b1",
+        "type": "function",
+        "z": "cae5227b907b5602",
+        "name": "Log request count",
+        "func": "let count = 0;\nif (global.get(\"count\") != null) {\n    count = global.get(\"count\");\n}\n\ncount = count + 1;\n\nglobal.set(\"count\", count);\n\nif (count % 1000 == 0) {\n    node.warn(\"Processed \" + count + \" requests.\");\n}\n\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1570,
+        "y": 1420,
+        "wires": [
+            [
+                "82f2ec024a4b3dc9",
+                "758de03e8e16432e"
+            ]
+        ]
+    },
+    {
+        "id": "758de03e8e16432e",
+        "type": "debug",
+        "z": "cae5227b907b5602",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1770,
+        "y": 1340,
+        "wires": []
+    },
+    {
+        "id": "ab48bc203631ac43",
+        "type": "debug",
+        "z": "cae5227b907b5602",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": true,
+        "complete": "$join([data.node_id, data.poi_name], ' ')",
+        "targetType": "jsonata",
+        "statusVal": "data.node_Id",
+        "statusType": "auto",
+        "x": 740,
+        "y": 1920,
+        "wires": []
+    },
+    {
+        "id": "81f28cecb425e7bb",
+        "type": "http request",
+        "z": "cae5227b907b5602",
+        "name": "Post request to FROST Mock",
+        "method": "POST",
+        "ret": "txt",
         "paytoqs": "ignore",
         "url": "http://127.0.0.1:1880/frost",
         "tls": "",
@@ -596,12 +1552,1102 @@
         "authType": "",
         "senderr": false,
         "headers": [],
-        "x": 1070,
-        "y": 880,
+        "x": 2180,
+        "y": 1680,
         "wires": [
             [
-                "40395c49fc5b987b",
-                "d20e1ce9259b672b"
+                "40395c49fc5b987b"
+            ]
+        ]
+    },
+    {
+        "id": "9797321a664c31a9",
+        "type": "delay",
+        "z": "cae5227b907b5602",
+        "name": "",
+        "pauseType": "delay",
+        "timeout": "1",
+        "timeoutUnits": "seconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "allowrate": false,
+        "outputs": 1,
+        "x": 420,
+        "y": 500,
+        "wires": [
+            [
+                "3219794e0e5813fa"
+            ]
+        ]
+    },
+    {
+        "id": "efe538ae26ec6d6f",
+        "type": "delay",
+        "z": "cae5227b907b5602",
+        "name": "",
+        "pauseType": "delay",
+        "timeout": "1",
+        "timeoutUnits": "seconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "allowrate": false,
+        "outputs": 1,
+        "x": 960,
+        "y": 940,
+        "wires": [
+            [
+                "855fa885a574ab27"
+            ]
+        ]
+    },
+    {
+        "id": "f30c708611403542",
+        "type": "http in",
+        "z": "44a72e5cf8149838",
+        "name": "",
+        "url": "/measure",
+        "method": "post",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 80,
+        "y": 320,
+        "wires": [
+            [
+                "5a568a396fece549",
+                "20dbf1eca269a644",
+                "97683e4a8e6aefe2"
+            ]
+        ]
+    },
+    {
+        "id": "5a568a396fece549",
+        "type": "debug",
+        "z": "44a72e5cf8149838",
+        "name": "Debug RAW request",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 320,
+        "y": 320,
+        "wires": []
+    },
+    {
+        "id": "f5e4bb03ba9ebc72",
+        "type": "http response",
+        "z": "44a72e5cf8149838",
+        "name": "Response OK",
+        "statusCode": "200",
+        "headers": {},
+        "x": 540,
+        "y": 560,
+        "wires": []
+    },
+    {
+        "id": "f6ea5f3bee20520f",
+        "type": "csv",
+        "z": "44a72e5cf8149838",
+        "name": "Request Parser",
+        "sep": " ",
+        "hdrin": "",
+        "hdrout": "none",
+        "multi": "one",
+        "ret": "\\n",
+        "temp": "gate, report, node_id, validity, signal-strength, unused-1, unused-2, unused-3, unused-4, pm10, pm25, pressure, temperature, humidity, gamma, unused-5, unixtime, ip, sync",
+        "skip": "0",
+        "strings": true,
+        "include_empty_strings": true,
+        "include_null_values": true,
+        "x": 400,
+        "y": 380,
+        "wires": [
+            [
+                "a8c9b3c3ad9c1acd",
+                "cba2d0077a43ab60"
+            ]
+        ]
+    },
+    {
+        "id": "3f976e2e8c3bd915",
+        "type": "json",
+        "z": "44a72e5cf8149838",
+        "name": "",
+        "property": "payload",
+        "action": "",
+        "pretty": true,
+        "x": 1770,
+        "y": 1480,
+        "wires": [
+            [
+                "f4ef14f136ecc89c",
+                "6c1b205cecaca5cc"
+            ]
+        ]
+    },
+    {
+        "id": "f4ef14f136ecc89c",
+        "type": "debug",
+        "z": "44a72e5cf8149838",
+        "name": "Debug JSON Payload",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1920,
+        "y": 1380,
+        "wires": []
+    },
+    {
+        "id": "97683e4a8e6aefe2",
+        "type": "function",
+        "z": "44a72e5cf8149838",
+        "name": "Build OK response",
+        "func": "msg.payload = {\n    status: \"OK\"\n};\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 230,
+        "y": 560,
+        "wires": [
+            [
+                "a40bdb3e8c6382b2",
+                "f5e4bb03ba9ebc72"
+            ]
+        ]
+    },
+    {
+        "id": "9104d18bc2318c65",
+        "type": "function",
+        "z": "44a72e5cf8149838",
+        "name": "Build SensorThings Request",
+        "func": "if (msg.payload[0] != null) {\n    // Retrieve temperature value from the payload\n    var result = msg.result;\n    var dsIoTId = msg.payload[0].dsIoTId;\n    \n    // Create a string to insert the result tot he FROST Server against a specific datastream.\n    var newMessage =  { \n        payload: {  \n            \"result\": result, \n            \"resultTime\": msg.data.timestamp,\n            \"phenomenonTime\": msg.data.timestamp,\n            \"Datastream\": {\n                \"@iot.id\": dsIoTId\n                \n            }\n            \n        } \n    };\n    \n    // Configure the Content-Type as json for the FROST Server\n    newMessage.headers = {\"Content-type\" : \"application/json\"};\n    \n    return newMessage;\n} else {\n    node.error(\"DS not found for node: \" + msg.data.poi_name + \"(\" + msg.data.node_id + \")\", msg);\n}\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1560,
+        "y": 1480,
+        "wires": [
+            [
+                "3f976e2e8c3bd915"
+            ]
+        ]
+    },
+    {
+        "id": "6c1b205cecaca5cc",
+        "type": "http request",
+        "z": "44a72e5cf8149838",
+        "name": "Post request to FROST",
+        "method": "POST",
+        "ret": "txt",
+        "paytoqs": "ignore",
+        "url": "http://web:8080/FROST-Server/v1.0/Observations",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "basic",
+        "senderr": false,
+        "headers": [],
+        "x": 1930,
+        "y": 1600,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "33883cac683595f6",
+        "type": "switch",
+        "z": "44a72e5cf8149838",
+        "name": "Switch on Gate",
+        "property": "data.gate",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "G99",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "G02",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 700,
+        "y": 840,
+        "wires": [
+            [
+                "0cf140f0b393a260"
+            ],
+            [
+                "0cf140f0b393a260"
+            ]
+        ]
+    },
+    {
+        "id": "a8c9b3c3ad9c1acd",
+        "type": "debug",
+        "z": "44a72e5cf8149838",
+        "name": "Debug parsed request",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 560,
+        "y": 480,
+        "wires": []
+    },
+    {
+        "id": "a40bdb3e8c6382b2",
+        "type": "debug",
+        "z": "44a72e5cf8149838",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 510,
+        "y": 620,
+        "wires": []
+    },
+    {
+        "id": "94c2edc6ce6e383e",
+        "type": "split",
+        "z": "44a72e5cf8149838",
+        "name": "",
+        "splt": "\\n",
+        "spltType": "str",
+        "arraySplt": 1,
+        "arraySpltType": "len",
+        "stream": false,
+        "addname": "attribute",
+        "x": 1130,
+        "y": 840,
+        "wires": [
+            [
+                "ff4d07e38be18a58"
+            ]
+        ]
+    },
+    {
+        "id": "ff4d07e38be18a58",
+        "type": "switch",
+        "z": "44a72e5cf8149838",
+        "name": "Switch on attribute",
+        "property": "attribute",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "temperature",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "pressure",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "humidity",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "pm10",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "pm25",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "gamma",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 6,
+        "x": 1310,
+        "y": 840,
+        "wires": [
+            [
+                "485058befb0c3e6c"
+            ],
+            [
+                "397cf55af814f1e7"
+            ],
+            [
+                "4dd88d5a6c23b7a1"
+            ],
+            [
+                "7d2efa159e0fce93"
+            ],
+            [
+                "54e03f89d8a3497b"
+            ],
+            [
+                "b602627686ee83af"
+            ]
+        ]
+    },
+    {
+        "id": "397cf55af814f1e7",
+        "type": "change",
+        "z": "44a72e5cf8149838",
+        "name": "Set DS type to Pressure",
+        "rules": [
+            {
+                "t": "set",
+                "p": "ds_type",
+                "pt": "msg",
+                "to": "Pressure",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1570,
+        "y": 780,
+        "wires": [
+            [
+                "f1c1ca222be84d3b"
+            ]
+        ]
+    },
+    {
+        "id": "485058befb0c3e6c",
+        "type": "change",
+        "z": "44a72e5cf8149838",
+        "name": "Set DS type to Temperature",
+        "rules": [
+            {
+                "t": "set",
+                "p": "ds_type",
+                "pt": "msg",
+                "to": "Temperature",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1580,
+        "y": 740,
+        "wires": [
+            [
+                "f1c1ca222be84d3b"
+            ]
+        ]
+    },
+    {
+        "id": "c25bdee2ef87203e",
+        "type": "postgresql",
+        "z": "44a72e5cf8149838",
+        "name": "Fetch DS",
+        "query": "SELECT \"ID\" as \"dsIoTId\" FROM public.\"DATASTREAMS\" WHERE \"NAME\" = 'DS-{{{ msg.data.poi_name }}}-{{{ msg.ds_type }}}';",
+        "postgreSQLConfig": "",
+        "split": false,
+        "rowsPerMsg": 1,
+        "outputs": 1,
+        "x": 1700,
+        "y": 1260,
+        "wires": [
+            [
+                "1387054ce3f81580",
+                "ce84456701a66690"
+            ]
+        ]
+    },
+    {
+        "id": "4dd88d5a6c23b7a1",
+        "type": "change",
+        "z": "44a72e5cf8149838",
+        "name": "Set DS type to Humidity",
+        "rules": [
+            {
+                "t": "set",
+                "p": "ds_type",
+                "pt": "msg",
+                "to": "Humidity",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1570,
+        "y": 820,
+        "wires": [
+            [
+                "f1c1ca222be84d3b"
+            ]
+        ]
+    },
+    {
+        "id": "3c77bb683c2fc109",
+        "type": "postgresql",
+        "z": "44a72e5cf8149838",
+        "name": "Fetch POI",
+        "query": "SELECT p.\"name\" as \"poi_name\", p.\"altitude\", d.\"active\" \n  FROM public.poi p, public.device d, public.device_poi dp \n WHERE d.\"name\" = '{{{ msg.data.node_id }}}'\n   AND d.device_poi_id = dp.device_poi_id\n   AND dp.poi_id = p.poi_id;",
+        "postgreSQLConfig": "c436fa76dcc9e99a",
+        "split": false,
+        "rowsPerMsg": 1,
+        "outputs": 1,
+        "x": 1180,
+        "y": 380,
+        "wires": [
+            [
+                "754bdb5503ea36d6",
+                "b403f86278d39262"
+            ]
+        ]
+    },
+    {
+        "id": "d7222f83e316e5f0",
+        "type": "debug",
+        "z": "44a72e5cf8149838",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 390,
+        "y": 980,
+        "wires": []
+    },
+    {
+        "id": "cba2d0077a43ab60",
+        "type": "change",
+        "z": "44a72e5cf8149838",
+        "name": "Preserve original payload",
+        "rules": [
+            {
+                "t": "set",
+                "p": "data",
+                "pt": "msg",
+                "to": "payload",
+                "tot": "msg",
+                "dc": true
+            },
+            {
+                "t": "set",
+                "p": "data.temperature",
+                "pt": "msg",
+                "to": "$number($replace(data.temperature, '+', ''))",
+                "tot": "jsonata"
+            },
+            {
+                "t": "set",
+                "p": "data.pressure",
+                "pt": "msg",
+                "to": "$number(data.pressure)",
+                "tot": "jsonata"
+            },
+            {
+                "t": "set",
+                "p": "data.altitude",
+                "pt": "msg",
+                "to": "$number(data.altitude)",
+                "tot": "jsonata"
+            },
+            {
+                "t": "set",
+                "p": "data.humidity",
+                "pt": "msg",
+                "to": "$number(data.humidity)",
+                "tot": "jsonata"
+            },
+            {
+                "t": "set",
+                "p": "data.pm10",
+                "pt": "msg",
+                "to": "$number(data.pm10)",
+                "tot": "jsonata"
+            },
+            {
+                "t": "set",
+                "p": "data.pm25",
+                "pt": "msg",
+                "to": "$number(data.pm25)",
+                "tot": "jsonata"
+            },
+            {
+                "t": "set",
+                "p": "data.gamma",
+                "pt": "msg",
+                "to": "$number(data.gamma)",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 670,
+        "y": 380,
+        "wires": [
+            [
+                "b863b7d80f15ee82",
+                "71967b36afbab78f"
+            ]
+        ]
+    },
+    {
+        "id": "40539016544310e3",
+        "type": "change",
+        "z": "44a72e5cf8149838",
+        "name": "Calculate values",
+        "rules": [
+            {
+                "t": "set",
+                "p": "data.pressure_sea",
+                "pt": "msg",
+                "to": "$round(data.pressure * $power((1 - (0.0065 * data.altitude) / (data.temperature + 0.0065 * data.altitude + 273.15)), -5.257), 1)",
+                "tot": "jsonata"
+            },
+            {
+                "t": "set",
+                "p": "data.gamma_cpm",
+                "pt": "msg",
+                "to": "$round(data.gamma/5, 0)",
+                "tot": "jsonata"
+            },
+            {
+                "t": "set",
+                "p": "data.timestamp",
+                "pt": "msg",
+                "to": "$fromMillis(data.unixtime*1000)\t",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 220,
+        "y": 840,
+        "wires": [
+            [
+                "d7222f83e316e5f0",
+                "97efe08cb7b4c765"
+            ]
+        ]
+    },
+    {
+        "id": "0cf140f0b393a260",
+        "type": "change",
+        "z": "44a72e5cf8149838",
+        "name": "Restore payload",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "data",
+                "tot": "msg",
+                "dc": true
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 940,
+        "y": 840,
+        "wires": [
+            [
+                "94c2edc6ce6e383e"
+            ]
+        ]
+    },
+    {
+        "id": "7d2efa159e0fce93",
+        "type": "change",
+        "z": "44a72e5cf8149838",
+        "name": "Set DS type to PM10",
+        "rules": [
+            {
+                "t": "set",
+                "p": "ds_type",
+                "pt": "msg",
+                "to": "PM10",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1560,
+        "y": 860,
+        "wires": [
+            [
+                "f1c1ca222be84d3b"
+            ]
+        ]
+    },
+    {
+        "id": "54e03f89d8a3497b",
+        "type": "change",
+        "z": "44a72e5cf8149838",
+        "name": "Set DS type to PM2.5",
+        "rules": [
+            {
+                "t": "set",
+                "p": "ds_type",
+                "pt": "msg",
+                "to": "PM2.5",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1560,
+        "y": 900,
+        "wires": [
+            [
+                "f1c1ca222be84d3b"
+            ]
+        ]
+    },
+    {
+        "id": "b602627686ee83af",
+        "type": "change",
+        "z": "44a72e5cf8149838",
+        "name": "Set DS type to CPM",
+        "rules": [
+            {
+                "t": "set",
+                "p": "ds_type",
+                "pt": "msg",
+                "to": "CPM",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1560,
+        "y": 940,
+        "wires": [
+            [
+                "f1c1ca222be84d3b"
+            ]
+        ]
+    },
+    {
+        "id": "b863b7d80f15ee82",
+        "type": "debug",
+        "z": "44a72e5cf8149838",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 810,
+        "y": 480,
+        "wires": []
+    },
+    {
+        "id": "754bdb5503ea36d6",
+        "type": "debug",
+        "z": "44a72e5cf8149838",
+        "name": "Fetch POI from DB",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1330,
+        "y": 320,
+        "wires": []
+    },
+    {
+        "id": "97efe08cb7b4c765",
+        "type": "function",
+        "z": "44a72e5cf8149838",
+        "name": "Calc temperature dew point",
+        "func": "let a = 6.1121;\nlet d = 234.5;\nlet b = 17.368;\nlet c = 238.88;\n\nif (msg.data.temperature < 0) {\n    b = 17.966;\n    c = 247.15;\n}\n\nlet gm;\n\nif (msg.data.humidity > 0) {\n    gm = Math.log( msg.data.humidity*0.01*( Math.pow(Math.exp(1),((b-msg.data.temperature/d)*(msg.data.temperature/(c+msg.data.temperature))))));\n}\nelse {\n    gm = Math.log( 0.1*0.01*( Math.pow(Math.exp(1),((b-msg.data.temperature/d)*(msg.data.temperature/(c+msg.data.temperature))))));\n}\n\nmsg.data.temperature_dew = Math.round((c*gm/(b-gm))*10)/10;\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 460,
+        "y": 840,
+        "wires": [
+            [
+                "33883cac683595f6",
+                "b8aa051d53dbd935",
+                "89e7fa2155c83b34"
+            ]
+        ]
+    },
+    {
+        "id": "b8aa051d53dbd935",
+        "type": "debug",
+        "z": "44a72e5cf8149838",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 670,
+        "y": 980,
+        "wires": []
+    },
+    {
+        "id": "20dbf1eca269a644",
+        "type": "change",
+        "z": "44a72e5cf8149838",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "$trim(msg.payload)\t",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 220,
+        "y": 440,
+        "wires": [
+            [
+                "f6ea5f3bee20520f"
+            ]
+        ]
+    },
+    {
+        "id": "f1c1ca222be84d3b",
+        "type": "change",
+        "z": "44a72e5cf8149838",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "result",
+                "pt": "msg",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1840,
+        "y": 820,
+        "wires": [
+            [
+                "d04766ec75641b0b"
+            ]
+        ]
+    },
+    {
+        "id": "71967b36afbab78f",
+        "type": "function",
+        "z": "44a72e5cf8149838",
+        "name": "Check cache for poi",
+        "func": "if (global.get(\"pois\") == null || global.get(\"pois\").get(msg.data.node_id) == null) {\n    return [msg, null];\n}\n\nmsg.payload = [global.get(\"pois\").get(msg.data.node_id)];\n\nreturn [null, msg];\n",
+        "outputs": 2,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 960,
+        "y": 380,
+        "wires": [
+            [
+                "3c77bb683c2fc109"
+            ],
+            [
+                "af458ee72f569f2f",
+                "d4f1a0bf630c23dc"
+            ]
+        ]
+    },
+    {
+        "id": "b403f86278d39262",
+        "type": "function",
+        "z": "44a72e5cf8149838",
+        "name": "Cache poi",
+        "func": "if (global.get(\"pois\") == null) {\n    global.set(\"pois\", new Map());\n}\n\nglobal.get(\"pois\").set(msg.data.node_id, {\n  \"poi_name\": msg.payload[0].poi_name,\n  \"altitude\": msg.payload[0].altitude,\n  \"active\": msg.payload[0].active\n});\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1380,
+        "y": 380,
+        "wires": [
+            [
+                "d4f1a0bf630c23dc",
+                "8b37b59603d3472c"
+            ]
+        ]
+    },
+    {
+        "id": "d4f1a0bf630c23dc",
+        "type": "function",
+        "z": "44a72e5cf8149838",
+        "name": "Set poi to data",
+        "func": "var poi = global.get(\"pois\").get(msg.data.node_id);\n\nmsg.data.poi_name = poi.poi_name;\nmsg.data.altitude = Number(poi.altitude);\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1320,
+        "y": 480,
+        "wires": [
+            [
+                "77d76599f2187461"
+            ]
+        ]
+    },
+    {
+        "id": "8b37b59603d3472c",
+        "type": "debug",
+        "z": "44a72e5cf8149838",
+        "name": "Cache POI",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1590,
+        "y": 380,
+        "wires": []
+    },
+    {
+        "id": "af458ee72f569f2f",
+        "type": "debug",
+        "z": "44a72e5cf8149838",
+        "name": "Get POI from cache",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1040,
+        "y": 480,
+        "wires": []
+    },
+    {
+        "id": "d04766ec75641b0b",
+        "type": "function",
+        "z": "44a72e5cf8149838",
+        "name": "Check cache for DS",
+        "func": "var dsName = \"DS-\" + msg.data.poi_name + \"-\" + msg.ds_type;\n\nif (global.get(dsName) == null) {\n    \n//    node.warn(\"Cache not found: \" + dsName);\n    \n    return [msg, null];\n}\n\n// node.warn(\"Cache FOUND: \" + dsName + \" = \" + global.get(dsName));\n\nmsg.payload = [{\n    \"dsIoTId\": global.get(dsName)\n}];\n\nreturn [null, msg];\n",
+        "outputs": 2,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1480,
+        "y": 1260,
+        "wires": [
+            [
+                "c25bdee2ef87203e"
+            ],
+            [
+                "9104d18bc2318c65"
+            ]
+        ]
+    },
+    {
+        "id": "1387054ce3f81580",
+        "type": "function",
+        "z": "44a72e5cf8149838",
+        "name": "Cache DS",
+        "func": "var dsName = \"DS-\" + msg.data.poi_name + \"-\" + msg.ds_type;\n\nglobal.set(dsName, msg.payload[0].dsIoTId);\n\nnode.warn(\"Cacheing \" + dsName + \" to \" + msg.payload[0].dsIoTId);\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1910,
+        "y": 1260,
+        "wires": [
+            [
+                "9104d18bc2318c65"
+            ]
+        ]
+    },
+    {
+        "id": "ce84456701a66690",
+        "type": "debug",
+        "z": "44a72e5cf8149838",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1820,
+        "y": 1200,
+        "wires": []
+    },
+    {
+        "id": "77d76599f2187461",
+        "type": "function",
+        "z": "44a72e5cf8149838",
+        "name": "Log request count",
+        "func": "let count = 0;\nif (global.get(\"count\") != null) {\n    count = global.get(\"count\");\n}\n\ncount = count + 1;\n\nglobal.set(\"count\", count);\n\nif (count % 1000 == 0) {\n    node.warn(\"Processed \" + count + \" requests.\");\n}\n\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1490,
+        "y": 560,
+        "wires": [
+            [
+                "40539016544310e3",
+                "58128cb6f099c9ce"
+            ]
+        ]
+    },
+    {
+        "id": "58128cb6f099c9ce",
+        "type": "debug",
+        "z": "44a72e5cf8149838",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1690,
+        "y": 480,
+        "wires": []
+    },
+    {
+        "id": "89e7fa2155c83b34",
+        "type": "debug",
+        "z": "44a72e5cf8149838",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": true,
+        "complete": "$join([data.node_id, data.poi_name], ' ')",
+        "targetType": "jsonata",
+        "statusVal": "data.node_Id",
+        "statusType": "auto",
+        "x": 660,
+        "y": 1060,
+        "wires": []
+    },
+    {
+        "id": "067a2aea3b29869a",
+        "type": "inject",
+        "z": "44a72e5cf8149838",
+        "name": "Test",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "G99 R732 N125 V 25 Z +000 N 00 0013 0017 0987.4 +14.0 065 0105 3.3 1677389269 26.02.2023 49.809",
+        "payloadType": "str",
+        "x": 110,
+        "y": 240,
+        "wires": [
+            [
+                "20dbf1eca269a644"
             ]
         ]
     },
@@ -1005,7 +3051,7 @@
         "type": "debug",
         "z": "6890a2de1814b84e",
         "name": "Debug Payload",
-        "active": true,
+        "active": false,
         "tosidebar": true,
         "console": false,
         "tostatus": false,
@@ -1021,31 +3067,12 @@
         "id": "ea7cf0a0a0c4e00f",
         "type": "http response",
         "z": "6890a2de1814b84e",
-        "name": "OK",
-        "statusCode": "200",
+        "name": "201 Created",
+        "statusCode": "201",
         "headers": {},
-        "x": 930,
+        "x": 890,
         "y": 100,
         "wires": []
-    },
-    {
-        "id": "02ac53c01fe46f19",
-        "type": "function",
-        "z": "6890a2de1814b84e",
-        "name": "Build OK Response",
-        "func": "msg.payload = {\n    status: \"OK\"\n};\n\nreturn msg;",
-        "outputs": 1,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 750,
-        "y": 100,
-        "wires": [
-            [
-                "ea7cf0a0a0c4e00f"
-            ]
-        ]
     },
     {
         "id": "a79694847aef5a5b",
@@ -1053,7 +3080,7 @@
         "z": "6890a2de1814b84e",
         "name": "",
         "pauseType": "delay",
-        "timeout": "5",
+        "timeout": "1",
         "timeoutUnits": "seconds",
         "rate": "1",
         "nbRateUnits": "1",
@@ -1068,7 +3095,34 @@
         "y": 100,
         "wires": [
             [
-                "02ac53c01fe46f19"
+                "18c759446f8e1f51"
+            ]
+        ]
+    },
+    {
+        "id": "18c759446f8e1f51",
+        "type": "change",
+        "z": "6890a2de1814b84e",
+        "name": "Clear Response",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 700,
+        "y": 100,
+        "wires": [
+            [
+                "ea7cf0a0a0c4e00f"
             ]
         ]
     },
@@ -1107,7 +3161,7 @@
         "type": "function",
         "z": "7bea746999d0be15",
         "name": "Build Response",
-        "func": "msg.payload = \"G02 R121 N01 V 45 Z +000 N 00 0014 0018 1012 +21.8 035 016 3.3 1538729821 05.10.2018\";\nmsg.payload += \"\\nG02 R128 N01 V 45 Z +000 N 00 0016 0022 1012 +21.0 034 129 3.3 1538730121 05.10.2018\";\nmsg.payload += \"\\nG02 R142 N01 V 45 Z +000 N 00 0010 0013 1012 +19.6 037 134 3.3 1538730720 05.10.2018\";\nmsg.payload += \"\\nG02 R216 N01 V 46 Z +000 N 00 0011 0015 1012 +22.9 031 010 3.3 1538734363 05.10.2018\";\nreturn msg;",
+        "func": "msg.payload = \"G02 R121 N01 V 45 Z +000 N 00 0014 0018 1012 +21.8 035 016 3.3 1538729821 05.10.2018\";\n// msg.payload += \"\\nG02 R128 N01 V 45 Z +000 N 00 0016 0022 1012 +21.0 034 129 3.3 1538730121 05.10.2018\";\n// msg.payload += \"\\nG02 R142 N01 V 45 Z +000 N 00 0010 0013 1012 +19.6 037 134 3.3 1538730720 05.10.2018\";\n// msg.payload += \"\\nG02 R216 N01 V 46 Z +000 N 00 0011 0015 1012 +22.9 031 010 3.3 1538734363 05.10.2018\";\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
@@ -1127,7 +3181,7 @@
         "type": "debug",
         "z": "7bea746999d0be15",
         "name": "Debug GetFileResponse",
-        "active": true,
+        "active": false,
         "tosidebar": true,
         "console": false,
         "tostatus": false,
